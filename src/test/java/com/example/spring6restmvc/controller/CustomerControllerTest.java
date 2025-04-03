@@ -1,5 +1,6 @@
 package com.example.spring6restmvc.controller;
 
+import com.example.spring6restmvc.model.Customer;
 import com.example.spring6restmvc.services.CustomerService;
 import com.example.spring6restmvc.services.CustomerServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,19 @@ class CustomerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()", is(3)));
+    }
+
+    @Test
+    void getCustomerById() throws Exception {
+        Customer testCustomer = customerServiceImpl.listCustomers().get(0);
+
+        given(customerService.getCustomerById(testCustomer.getId())).willReturn(testCustomer);
+
+        mockMvc.perform(get("/api/v1/customer/" + testCustomer.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", is(testCustomer.getId().toString())))
+                .andExpect(jsonPath("$.name", is(testCustomer.getName())));
     }
 }
