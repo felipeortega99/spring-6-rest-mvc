@@ -33,5 +33,5 @@ public class Customer {
     @Version
     private Integer version;
     private LocalDateTime createdDate;
-    private LocalDateTime modifiedDat;
+    private LocalDateTime modifiedDate;
 }
