@@ -21,10 +21,7 @@ class BeerControllerIT {
     BeerController controller;
 
     @Autowired
-    BeerRepository repository;
-
-    @Autowired
-    private BeerRepository beerRepository;
+    BeerRepository beerRepository;
 
     @Test
     void testBeerIdNotFound() {
