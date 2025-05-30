@@ -29,6 +29,13 @@ class BeerControllerIT {
     @Autowired
     BeerMapper beerMapper;
 
+    @Test
+    void deleteByIdNotFound() {
+        assertThrows(NotFoundException.class, () -> {
+            controller.deleteById(UUID.randomUUID());
+        });
+    }
+
     @Rollback
     @Transactional
     @Test
